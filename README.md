@@ -29,6 +29,9 @@ Import the library in your file:
 
 ```dart
 import 'package:onetwothree_sdk/onetwothree_sdk.dart';
+import 'package:onetwothree_sdk/models/buyer.dart';
+import 'package:onetwothree_sdk/models/merchant.dart';
+import 'package:onetwothree_sdk/models/transaction.dart';
 import 'package:onetwothree_sdk/models/response/start_deeplink_response.dart';
 ```
 
