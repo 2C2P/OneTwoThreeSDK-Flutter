@@ -1,0 +1,11 @@
+framework module OneTwoThreeSDK {
+  umbrella header "OneTwoThreeSDK.h"
+
+  export *
+  module * { export * }
+}
+
+module OneTwoThreeSDK.Swift {
+    header "OneTwoThreeSDK-Swift.h"
+    requires objc
+}
