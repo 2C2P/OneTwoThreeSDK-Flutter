@@ -1,5 +1,6 @@
 # OneTwoThreeSDK for Flutter
 
+[![pub package](https://img.shields.io/pub/v/onetwothree_sdk)](https://img.shields.io/pub/v/onetwothree_sdk)
 [![Platforms](https://img.shields.io/badge/Platforms-Android-green?style=flat-square)](https://img.shields.io/badge/Platforms-iOS-Green?style=flat-square)
 [![Platforms](https://img.shields.io/badge/Platforms-iOS-orange?style=flat-square)](https://img.shields.io/badge/Platforms-iOS-Green?style=flat-square)
 [![Language](https://img.shields.io/badge/Language-Dart-blue?style=flat-square)](https://img.shields.io/badge/Platforms-iOS-Green?style=flat-square)
