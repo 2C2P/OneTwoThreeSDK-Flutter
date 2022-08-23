@@ -5,9 +5,10 @@
 
 import 'dart:convert';
 
+import 'package:onetwothree_sdk/models/response/transaction_response.dart';
+
 import '../agent.dart';
 import '../merchant.dart';
-import '../transaction.dart';
 
 class GetDeeplinkStatusResponse {
   GetDeeplinkStatusResponse({
@@ -24,7 +25,7 @@ class GetDeeplinkStatusResponse {
   String? checksum;
   Agent? agent;
   Merchant? merchant;
-  Transaction? transaction;
+  TransactionResponse? transaction;
 
   factory GetDeeplinkStatusResponse.fromJson(String str) => GetDeeplinkStatusResponse.fromMap(json.decode(str));
 
@@ -36,7 +37,7 @@ class GetDeeplinkStatusResponse {
         checksum: json["checksum"] == null ? null : json["checksum"],
         agent: json["agent"] == null ? null : Agent.fromMap(json["agent"]),
         merchant: json["merchant"] == null ? null : Merchant.fromMap(json["merchant"]),
-        transaction: json["transaction"] == null ? null : Transaction.fromMap(json["transaction"]),
+        transaction: json["transaction"] == null ? null : TransactionResponse.fromMap(json["transaction"]),
       );
 
   Map<String, dynamic> toMap() => {

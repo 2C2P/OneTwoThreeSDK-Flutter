@@ -11,7 +11,7 @@ Add this to your package's pubspec.yaml file:
 
 ```yaml
 dependencies:
-  onetwothree_sdk: ^0.0.1
+  onetwothree_sdk: ^0.0.2
 ```
 
 ## System Requirements
@@ -23,15 +23,31 @@ The SDK has been developed using `Dart version >=2.12.0`, `iOS Deployment Target
 | iOS | 11.0 |
 | Android | 6 (API Level 23) | 
 
+## Initialize
+
+Please place followings code to `main.dart` for initialize the sdk.
+
+```dart
+try {
+      await OneTwoThreeSDK.initialize(
+        isProduction: false,
+        checkSumKey: Platform.isAndroid ? <AndroidConstants.checksumKey> : <iOSConstants.checksumKey>,
+        publicKey: Platform.isAndroid ? <AndroidConstants.publicKey> : <iOSConstants.publicKey>,
+        privateKey: Platform.isAndroid ? <AndroidConstants.privateKey> : <iOSConstants.privateKey>,
+        passphrase: Platform.isAndroid ? <AndroidConstants.passphrase> : <iOSConstants.passphrase>,
+        bksPassphrase: Platform.isAndroid ? <AndroidConstants.bksPassphrase> : '',
+      );
+} on Exception {
+  print('Failed to intialize for SDK.');
+}
+```
+
 ## Usage
 
 Import the library in your file:
 
 ```dart
 import 'package:onetwothree_sdk/onetwothree_sdk.dart';
-import 'package:onetwothree_sdk/models/buyer.dart';
-import 'package:onetwothree_sdk/models/merchant.dart';
-import 'package:onetwothree_sdk/models/transaction.dart';
 import 'package:onetwothree_sdk/models/response/start_deeplink_response.dart';
 ```
 

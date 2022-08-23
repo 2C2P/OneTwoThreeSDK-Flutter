@@ -5,8 +5,9 @@
 
 import 'dart:convert';
 
+import 'package:onetwothree_sdk/models/response/transaction_response.dart';
+
 import '../merchant.dart';
-import '../transaction.dart';
 
 class StartDeeplinkResponse {
   StartDeeplinkResponse({
@@ -23,7 +24,7 @@ class StartDeeplinkResponse {
   String? deeplinkUrl;
   String? checksum;
   Merchant? merchant;
-  Transaction? transaction;
+  TransactionResponse? transaction;
 
   factory StartDeeplinkResponse.fromJson(String str) => StartDeeplinkResponse.fromMap(json.decode(str));
 
@@ -35,7 +36,7 @@ class StartDeeplinkResponse {
         deeplinkUrl: json["deeplink_url"] == null ? null : json["deeplink_url"],
         checksum: json["checksum"] == null ? null : json["checksum"],
         merchant: json["merchant"] == null ? null : Merchant.fromMap(json["merchant"]),
-        transaction: json["transaction"] == null ? null : Transaction.fromMap(json["transaction"]),
+        transaction: json["transaction"] == null ? null : TransactionResponse.fromMap(json["transaction"]),
       );
 
   Map<String, dynamic> toMap() => {
