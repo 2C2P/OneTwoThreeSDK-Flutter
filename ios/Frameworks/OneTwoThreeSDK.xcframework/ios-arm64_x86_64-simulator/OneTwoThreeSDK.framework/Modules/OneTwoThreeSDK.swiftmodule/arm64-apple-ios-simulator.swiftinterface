@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.26.9 clang-1205.0.19.55)
+// swift-compiler-version: Apple Swift version 5.6.1 (swiftlang-5.6.0.323.66 clang-1316.0.20.12)
 // swift-module-flags: -target arm64-apple-ios11.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name OneTwoThreeSDK
 import Combine
 import CommonCrypto
@@ -10,6 +10,7 @@ import MobileCoreServices
 import Swift
 import SystemConfiguration
 import UIKit
+import _Concurrency
 @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
 public struct DataResponsePublisher<Value> : Combine.Publisher {
   public typealias Output = OneTwoThreeSDK.DataResponse<Value, OneTwoThreeSDK.AFError>
@@ -21,11 +22,11 @@ public struct DataResponsePublisher<Value> : Combine.Publisher {
   public func receive<S>(subscriber: S) where S : Combine.Subscriber, S.Failure == OneTwoThreeSDK.DataResponsePublisher<Value>.Failure, S.Input == OneTwoThreeSDK.DataResponsePublisher<Value>.Output
 }
 @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
-extension DataResponsePublisher where Value == Foundation.Data? {
+extension OneTwoThreeSDK.DataResponsePublisher where Value == Foundation.Data? {
   @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
   public init(_ request: OneTwoThreeSDK.DataRequest, queue: Dispatch.DispatchQueue)
 }
-extension DataRequest {
+extension OneTwoThreeSDK.DataRequest {
   @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
   public func publishResponse<Serializer, T>(using serializer: Serializer, on queue: Dispatch.DispatchQueue = .main) -> OneTwoThreeSDK.DataResponsePublisher<T> where Serializer : OneTwoThreeSDK.ResponseSerializer, T == Serializer.SerializedObject
   @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
@@ -46,7 +47,7 @@ public struct DataStreamPublisher<Value> : Combine.Publisher {
   public func value() -> Combine.AnyPublisher<Value, OneTwoThreeSDK.AFError>
   public func receive<S>(subscriber: S) where S : Combine.Subscriber, S.Failure == OneTwoThreeSDK.DataStreamPublisher<Value>.Failure, S.Input == OneTwoThreeSDK.DataStreamPublisher<Value>.Output
 }
-extension DataStreamRequest {
+extension OneTwoThreeSDK.DataStreamRequest {
   @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
   final public func publishStream<Serializer>(using serializer: Serializer, on queue: Dispatch.DispatchQueue = .main) -> OneTwoThreeSDK.DataStreamPublisher<Serializer.SerializedObject> where Serializer : OneTwoThreeSDK.DataStreamSerializer
   @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
@@ -67,7 +68,7 @@ public struct DownloadResponsePublisher<Value> : Combine.Publisher {
   public func value() -> Combine.AnyPublisher<Value, OneTwoThreeSDK.AFError>
   public func receive<S>(subscriber: S) where S : Combine.Subscriber, S.Failure == OneTwoThreeSDK.DownloadResponsePublisher<Value>.Failure, S.Input == OneTwoThreeSDK.DownloadResponsePublisher<Value>.Output
 }
-extension DownloadRequest {
+extension OneTwoThreeSDK.DownloadRequest {
   @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
   public func publishResponse<Serializer, T>(using serializer: Serializer, on queue: Dispatch.DispatchQueue = .main) -> OneTwoThreeSDK.DownloadResponsePublisher<T> where Serializer : OneTwoThreeSDK.ResponseSerializer, T == Serializer.SerializedObject
   @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
@@ -82,11 +83,11 @@ extension DownloadRequest {
   public func publishDecodable<T>(type: T.Type = T.self, queue: Dispatch.DispatchQueue = .main, preprocessor: OneTwoThreeSDK.DataPreprocessor = DecodableResponseSerializer<T>.defaultDataPreprocessor, decoder: OneTwoThreeSDK.DataDecoder = JSONDecoder(), emptyResponseCodes: Swift.Set<Swift.Int> = DecodableResponseSerializer<T>.defaultEmptyResponseCodes, emptyResponseMethods: Swift.Set<OneTwoThreeSDK.HTTPMethod> = DecodableResponseSerializer<T>.defaultEmptyRequestMethods) -> OneTwoThreeSDK.DownloadResponsePublisher<T> where T : Swift.Decodable
 }
 @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
-extension DownloadResponsePublisher where Value == Foundation.URL? {
+extension OneTwoThreeSDK.DownloadResponsePublisher where Value == Foundation.URL? {
   @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
   public init(_ request: OneTwoThreeSDK.DownloadRequest, queue: Dispatch.DispatchQueue)
 }
-extension DownloadRequest {
+extension OneTwoThreeSDK.DownloadRequest {
   @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
   public func publishUnserialized(on queue: Dispatch.DispatchQueue = .main) -> OneTwoThreeSDK.DownloadResponsePublisher<Foundation.URL?>
 }
@@ -177,7 +178,7 @@ public class MerchantData : Swift.Codable {
   open func startListening(onQueue queue: Dispatch.DispatchQueue = .main, onUpdatePerforming listener: @escaping OneTwoThreeSDK.NetworkReachabilityManager.Listener) -> Swift.Bool
   open func stopListening()
 }
-extension NetworkReachabilityManager.NetworkReachabilityStatus : Swift.Equatable {
+extension OneTwoThreeSDK.NetworkReachabilityManager.NetworkReachabilityStatus : Swift.Equatable {
   public static func == (a: OneTwoThreeSDK.NetworkReachabilityManager.NetworkReachabilityStatus, b: OneTwoThreeSDK.NetworkReachabilityManager.NetworkReachabilityStatus) -> Swift.Bool
 }
 public struct CancelDeeplinkResponse {
@@ -188,13 +189,12 @@ public struct CancelDeeplinkResponse {
 }
 @objc open class SessionDelegate : ObjectiveC.NSObject {
   public init(fileManager: Foundation.FileManager = .default)
-  @objc override dynamic public init()
   @objc deinit
 }
-extension SessionDelegate : Foundation.URLSessionDelegate {
+extension OneTwoThreeSDK.SessionDelegate : Foundation.URLSessionDelegate {
   @objc dynamic open func urlSession(_ session: Foundation.URLSession, didBecomeInvalidWithError error: Swift.Error?)
 }
-extension SessionDelegate : Foundation.URLSessionTaskDelegate {
+extension OneTwoThreeSDK.SessionDelegate : Foundation.URLSessionTaskDelegate {
   @objc dynamic open func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didReceive challenge: Foundation.URLAuthenticationChallenge, completionHandler: @escaping (Foundation.URLSession.AuthChallengeDisposition, Foundation.URLCredential?) -> Swift.Void)
   @objc dynamic open func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didSendBodyData bytesSent: Swift.Int64, totalBytesSent: Swift.Int64, totalBytesExpectedToSend: Swift.Int64)
   @objc dynamic open func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, needNewBodyStream completionHandler: @escaping (Foundation.InputStream?) -> Swift.Void)
@@ -204,11 +204,11 @@ extension SessionDelegate : Foundation.URLSessionTaskDelegate {
   @available(macOS 10.13, iOS 11.0, tvOS 11.0, watchOS 4.0, *)
   @objc dynamic open func urlSession(_ session: Foundation.URLSession, taskIsWaitingForConnectivity task: Foundation.URLSessionTask)
 }
-extension SessionDelegate : Foundation.URLSessionDataDelegate {
+extension OneTwoThreeSDK.SessionDelegate : Foundation.URLSessionDataDelegate {
   @objc dynamic open func urlSession(_ session: Foundation.URLSession, dataTask: Foundation.URLSessionDataTask, didReceive data: Foundation.Data)
   @objc dynamic open func urlSession(_ session: Foundation.URLSession, dataTask: Foundation.URLSessionDataTask, willCacheResponse proposedResponse: Foundation.CachedURLResponse, completionHandler: @escaping (Foundation.CachedURLResponse?) -> Swift.Void)
 }
-extension SessionDelegate : Foundation.URLSessionDownloadDelegate {
+extension OneTwoThreeSDK.SessionDelegate : Foundation.URLSessionDownloadDelegate {
   @objc dynamic open func urlSession(_ session: Foundation.URLSession, downloadTask: Foundation.URLSessionDownloadTask, didResumeAtOffset fileOffset: Swift.Int64, expectedTotalBytes: Swift.Int64)
   @objc dynamic open func urlSession(_ session: Foundation.URLSession, downloadTask: Foundation.URLSessionDownloadTask, didWriteData bytesWritten: Swift.Int64, totalBytesWritten: Swift.Int64, totalBytesExpectedToWrite: Swift.Int64)
   @objc dynamic open func urlSession(_ session: Foundation.URLSession, downloadTask: Foundation.URLSessionDownloadTask, didFinishDownloadingTo location: Foundation.URL)
@@ -216,27 +216,27 @@ extension SessionDelegate : Foundation.URLSessionDownloadDelegate {
 public protocol URLConvertible {
   func asURL() throws -> Foundation.URL
 }
-extension String : OneTwoThreeSDK.URLConvertible {
+extension Swift.String : OneTwoThreeSDK.URLConvertible {
   public func asURL() throws -> Foundation.URL
 }
-extension URL : OneTwoThreeSDK.URLConvertible {
+extension Foundation.URL : OneTwoThreeSDK.URLConvertible {
   public func asURL() throws -> Foundation.URL
 }
-extension URLComponents : OneTwoThreeSDK.URLConvertible {
+extension Foundation.URLComponents : OneTwoThreeSDK.URLConvertible {
   public func asURL() throws -> Foundation.URL
 }
 public protocol URLRequestConvertible {
   func asURLRequest() throws -> Foundation.URLRequest
 }
-extension URLRequestConvertible {
+extension OneTwoThreeSDK.URLRequestConvertible {
   public var urlRequest: Foundation.URLRequest? {
     get
   }
 }
-extension URLRequest : OneTwoThreeSDK.URLRequestConvertible {
+extension Foundation.URLRequest : OneTwoThreeSDK.URLRequestConvertible {
   public func asURLRequest() throws -> Foundation.URLRequest
 }
-extension URLRequest {
+extension Foundation.URLRequest {
   public init(url: OneTwoThreeSDK.URLConvertible, method: OneTwoThreeSDK.HTTPMethod, headers: OneTwoThreeSDK.HTTPHeaders? = nil) throws
 }
 open class MultipartFormData {
@@ -364,13 +364,13 @@ public enum AFError : Swift.Error {
   case sessionTaskFailed(error: Swift.Error)
   case urlRequestValidationFailed(reason: OneTwoThreeSDK.AFError.URLRequestValidationFailureReason)
 }
-extension Error {
+extension Swift.Error {
   public var asAFError: OneTwoThreeSDK.AFError? {
     get
   }
   public func asAFError(orFailWith message: @autoclosure () -> Swift.String, file: Swift.StaticString = #file, line: Swift.UInt = #line) -> OneTwoThreeSDK.AFError
 }
-extension AFError {
+extension OneTwoThreeSDK.AFError {
   public var isSessionDeinitializedError: Swift.Bool {
     get
   }
@@ -420,7 +420,7 @@ extension AFError {
     get
   }
 }
-extension AFError {
+extension OneTwoThreeSDK.AFError {
   public var urlConvertible: OneTwoThreeSDK.URLConvertible? {
     get
   }
@@ -452,7 +452,7 @@ extension AFError {
     get
   }
 }
-extension AFError : Foundation.LocalizedError {
+extension OneTwoThreeSDK.AFError : Foundation.LocalizedError {
   public var errorDescription: Swift.String? {
     get
   }
@@ -471,7 +471,7 @@ public struct Redirector {
   public let behavior: OneTwoThreeSDK.Redirector.Behavior
   public init(behavior: OneTwoThreeSDK.Redirector.Behavior)
 }
-extension Redirector : OneTwoThreeSDK.RedirectHandler {
+extension OneTwoThreeSDK.Redirector : OneTwoThreeSDK.RedirectHandler {
   public func task(_ task: Foundation.URLSessionTask, willBeRedirectedTo request: Foundation.URLRequest, for response: Foundation.HTTPURLResponse, completion: @escaping (Foundation.URLRequest?) -> Swift.Void)
 }
 public struct ResponseCode {
@@ -558,7 +558,7 @@ open class Session {
   open func upload(multipartFormData: OneTwoThreeSDK.MultipartFormData, to url: OneTwoThreeSDK.URLConvertible, usingThreshold encodingMemoryThreshold: Swift.UInt64 = MultipartFormData.encodingMemoryThreshold, method: OneTwoThreeSDK.HTTPMethod = .post, headers: OneTwoThreeSDK.HTTPHeaders? = nil, interceptor: OneTwoThreeSDK.RequestInterceptor? = nil, fileManager: Foundation.FileManager = .default, requestModifier: OneTwoThreeSDK.Session.RequestModifier? = nil) -> OneTwoThreeSDK.UploadRequest
   open func upload(multipartFormData: OneTwoThreeSDK.MultipartFormData, with request: OneTwoThreeSDK.URLRequestConvertible, usingThreshold encodingMemoryThreshold: Swift.UInt64 = MultipartFormData.encodingMemoryThreshold, interceptor: OneTwoThreeSDK.RequestInterceptor? = nil, fileManager: Foundation.FileManager = .default) -> OneTwoThreeSDK.UploadRequest
 }
-extension Session : OneTwoThreeSDK.RequestDelegate {
+extension OneTwoThreeSDK.Session : OneTwoThreeSDK.RequestDelegate {
   public var sessionConfiguration: Foundation.URLSessionConfiguration {
     get
   }
@@ -580,7 +580,7 @@ public protocol AlamofireExtended {
   static var af: OneTwoThreeSDK.AlamofireExtension<Self.ExtendedType>.Type { get set }
   var af: OneTwoThreeSDK.AlamofireExtension<Self.ExtendedType> { get set }
 }
-extension AlamofireExtended {
+extension OneTwoThreeSDK.AlamofireExtended {
   public static var af: OneTwoThreeSDK.AlamofireExtension<Self>.Type {
     get
     set
@@ -610,7 +610,6 @@ open class RetryPolicy : OneTwoThreeSDK.RequestInterceptor {
 }
 open class ConnectionLostRetryPolicy : OneTwoThreeSDK.RetryPolicy {
   public init(retryLimit: Swift.UInt = RetryPolicy.defaultRetryLimit, exponentialBackoffBase: Swift.UInt = RetryPolicy.defaultExponentialBackoffBase, exponentialBackoffScale: Swift.Double = RetryPolicy.defaultExponentialBackoffScale, retryableHTTPMethods: Swift.Set<OneTwoThreeSDK.HTTPMethod> = RetryPolicy.defaultRetryableHTTPMethods)
-  override public init(retryLimit: Swift.UInt = super, exponentialBackoffBase: Swift.UInt = super, exponentialBackoffScale: Swift.Double = super, retryableHTTPMethods: Swift.Set<OneTwoThreeSDK.HTTPMethod> = super, retryableHTTPStatusCodes: Swift.Set<Swift.Int> = super, retryableURLErrorCodes: Swift.Set<Foundation.URLError.Code> = super)
   @objc deinit
 }
 public class Transaction : Swift.Codable {
@@ -698,7 +697,7 @@ final public class URLEncodedFormEncoder {
   final public func encode(_ value: Swift.Encodable) throws -> Foundation.Data
   @objc deinit
 }
-extension CharacterSet {
+extension Foundation.CharacterSet {
   public static let afURLQueryAllowed: Foundation.CharacterSet
 }
 public typealias AFDataResponse<Success> = OneTwoThreeSDK.DataResponse<Success, OneTwoThreeSDK.AFError>
@@ -718,7 +717,7 @@ public struct DataResponse<Success, Failure> where Failure : Swift.Error {
   }
   public init(request: Foundation.URLRequest?, response: Foundation.HTTPURLResponse?, data: Foundation.Data?, metrics: Foundation.URLSessionTaskMetrics?, serializationDuration: Foundation.TimeInterval, result: Swift.Result<Success, Failure>)
 }
-extension DataResponse : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
+extension OneTwoThreeSDK.DataResponse : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
   }
@@ -726,7 +725,7 @@ extension DataResponse : Swift.CustomStringConvertible, Swift.CustomDebugStringC
     get
   }
 }
-extension DataResponse {
+extension OneTwoThreeSDK.DataResponse {
   public func map<NewSuccess>(_ transform: (Success) -> NewSuccess) -> OneTwoThreeSDK.DataResponse<NewSuccess, Failure>
   public func tryMap<NewSuccess>(_ transform: (Success) throws -> NewSuccess) -> OneTwoThreeSDK.DataResponse<NewSuccess, Swift.Error>
   public func mapError<NewFailure>(_ transform: (Failure) -> NewFailure) -> OneTwoThreeSDK.DataResponse<Success, NewFailure> where NewFailure : Swift.Error
@@ -748,7 +747,7 @@ public struct DownloadResponse<Success, Failure> where Failure : Swift.Error {
   }
   public init(request: Foundation.URLRequest?, response: Foundation.HTTPURLResponse?, fileURL: Foundation.URL?, resumeData: Foundation.Data?, metrics: Foundation.URLSessionTaskMetrics?, serializationDuration: Foundation.TimeInterval, result: Swift.Result<Success, Failure>)
 }
-extension DownloadResponse : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
+extension OneTwoThreeSDK.DownloadResponse : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var description: Swift.String {
     get
   }
@@ -756,7 +755,7 @@ extension DownloadResponse : Swift.CustomStringConvertible, Swift.CustomDebugStr
     get
   }
 }
-extension DownloadResponse {
+extension OneTwoThreeSDK.DownloadResponse {
   public func map<NewSuccess>(_ transform: (Success) -> NewSuccess) -> OneTwoThreeSDK.DownloadResponse<NewSuccess, Failure>
   public func tryMap<NewSuccess>(_ transform: (Success) throws -> NewSuccess) -> OneTwoThreeSDK.DownloadResponse<NewSuccess, Swift.Error>
   public func mapError<NewFailure>(_ transform: (Failure) -> NewFailure) -> OneTwoThreeSDK.DownloadResponse<Success, NewFailure> where NewFailure : Swift.Error
@@ -764,8 +763,8 @@ extension DownloadResponse {
 }
 public typealias Generic<T> = (T)
 public typealias CompletionBlock = () -> Swift.Void
-public typealias GenericCompletionBlock<T> = (T) -> Swift.Void
-public typealias FailureBlock = (OneTwoThreeSDK.ErrorEvent) -> Swift.Void
+public typealias GenericCompletionBlock<T> = (_ object: T) -> Swift.Void
+public typealias FailureBlock = (_ error: OneTwoThreeSDK.ErrorEvent) -> Swift.Void
 public struct TransactionResponse : Swift.Codable {
   public let paymentCode: Swift.String?
   public let paymentStatus: Swift.String?
@@ -797,7 +796,7 @@ public struct GoogleXSSIPreprocessor : OneTwoThreeSDK.DataPreprocessor {
   public init()
   public func preprocess(_ data: Foundation.Data) throws -> Foundation.Data
 }
-extension ResponseSerializer {
+extension OneTwoThreeSDK.ResponseSerializer {
   public static var defaultDataPreprocessor: OneTwoThreeSDK.DataPreprocessor {
     get
   }
@@ -820,16 +819,16 @@ extension ResponseSerializer {
   public func responseAllowsEmptyResponseData(_ response: Foundation.HTTPURLResponse?) -> Swift.Bool?
   public func emptyResponseAllowed(forRequest request: Foundation.URLRequest?, response: Foundation.HTTPURLResponse?) -> Swift.Bool
 }
-extension DownloadResponseSerializerProtocol where Self : OneTwoThreeSDK.DataResponseSerializerProtocol {
+extension OneTwoThreeSDK.DownloadResponseSerializerProtocol where Self : OneTwoThreeSDK.DataResponseSerializerProtocol {
   public func serializeDownload(request: Foundation.URLRequest?, response: Foundation.HTTPURLResponse?, fileURL: Foundation.URL?, error: Swift.Error?) throws -> Self.SerializedObject
 }
-extension DataRequest {
+extension OneTwoThreeSDK.DataRequest {
   @discardableResult
   public func response(queue: Dispatch.DispatchQueue = .main, completionHandler: @escaping (OneTwoThreeSDK.AFDataResponse<Foundation.Data?>) -> Swift.Void) -> Self
   @discardableResult
   public func response<Serializer>(queue: Dispatch.DispatchQueue = .main, responseSerializer: Serializer, completionHandler: @escaping (OneTwoThreeSDK.AFDataResponse<Serializer.SerializedObject>) -> Swift.Void) -> Self where Serializer : OneTwoThreeSDK.DataResponseSerializerProtocol
 }
-extension DownloadRequest {
+extension OneTwoThreeSDK.DownloadRequest {
   @discardableResult
   public func response(queue: Dispatch.DispatchQueue = .main, completionHandler: @escaping (OneTwoThreeSDK.AFDownloadResponse<Foundation.URL?>) -> Swift.Void) -> Self
   @discardableResult
@@ -840,7 +839,7 @@ public struct URLResponseSerializer : OneTwoThreeSDK.DownloadResponseSerializerP
   public func serializeDownload(request: Foundation.URLRequest?, response: Foundation.HTTPURLResponse?, fileURL: Foundation.URL?, error: Swift.Error?) throws -> Foundation.URL
   public typealias SerializedObject = Foundation.URL
 }
-extension DownloadRequest {
+extension OneTwoThreeSDK.DownloadRequest {
   @discardableResult
   public func responseURL(queue: Dispatch.DispatchQueue = .main, completionHandler: @escaping (OneTwoThreeSDK.AFDownloadResponse<Foundation.URL>) -> Swift.Void) -> Self
 }
@@ -853,11 +852,11 @@ final public class DataResponseSerializer : OneTwoThreeSDK.ResponseSerializer {
   public typealias SerializedObject = Foundation.Data
   @objc deinit
 }
-extension DataRequest {
+extension OneTwoThreeSDK.DataRequest {
   @discardableResult
   public func responseData(queue: Dispatch.DispatchQueue = .main, dataPreprocessor: OneTwoThreeSDK.DataPreprocessor = DataResponseSerializer.defaultDataPreprocessor, emptyResponseCodes: Swift.Set<Swift.Int> = DataResponseSerializer.defaultEmptyResponseCodes, emptyRequestMethods: Swift.Set<OneTwoThreeSDK.HTTPMethod> = DataResponseSerializer.defaultEmptyRequestMethods, completionHandler: @escaping (OneTwoThreeSDK.AFDataResponse<Foundation.Data>) -> Swift.Void) -> Self
 }
-extension DownloadRequest {
+extension OneTwoThreeSDK.DownloadRequest {
   @discardableResult
   public func responseData(queue: Dispatch.DispatchQueue = .main, dataPreprocessor: OneTwoThreeSDK.DataPreprocessor = DataResponseSerializer.defaultDataPreprocessor, emptyResponseCodes: Swift.Set<Swift.Int> = DataResponseSerializer.defaultEmptyResponseCodes, emptyRequestMethods: Swift.Set<OneTwoThreeSDK.HTTPMethod> = DataResponseSerializer.defaultEmptyRequestMethods, completionHandler: @escaping (OneTwoThreeSDK.AFDownloadResponse<Foundation.Data>) -> Swift.Void) -> Self
 }
@@ -871,11 +870,11 @@ final public class StringResponseSerializer : OneTwoThreeSDK.ResponseSerializer 
   public typealias SerializedObject = Swift.String
   @objc deinit
 }
-extension DataRequest {
+extension OneTwoThreeSDK.DataRequest {
   @discardableResult
   public func responseString(queue: Dispatch.DispatchQueue = .main, dataPreprocessor: OneTwoThreeSDK.DataPreprocessor = StringResponseSerializer.defaultDataPreprocessor, encoding: Swift.String.Encoding? = nil, emptyResponseCodes: Swift.Set<Swift.Int> = StringResponseSerializer.defaultEmptyResponseCodes, emptyRequestMethods: Swift.Set<OneTwoThreeSDK.HTTPMethod> = StringResponseSerializer.defaultEmptyRequestMethods, completionHandler: @escaping (OneTwoThreeSDK.AFDataResponse<Swift.String>) -> Swift.Void) -> Self
 }
-extension DownloadRequest {
+extension OneTwoThreeSDK.DownloadRequest {
   @discardableResult
   public func responseString(queue: Dispatch.DispatchQueue = .main, dataPreprocessor: OneTwoThreeSDK.DataPreprocessor = StringResponseSerializer.defaultDataPreprocessor, encoding: Swift.String.Encoding? = nil, emptyResponseCodes: Swift.Set<Swift.Int> = StringResponseSerializer.defaultEmptyResponseCodes, emptyRequestMethods: Swift.Set<OneTwoThreeSDK.HTTPMethod> = StringResponseSerializer.defaultEmptyRequestMethods, completionHandler: @escaping (OneTwoThreeSDK.AFDownloadResponse<Swift.String>) -> Swift.Void) -> Self
 }
@@ -889,11 +888,11 @@ final public class JSONResponseSerializer : OneTwoThreeSDK.ResponseSerializer {
   public typealias SerializedObject = Any
   @objc deinit
 }
-extension DataRequest {
+extension OneTwoThreeSDK.DataRequest {
   @discardableResult
   public func responseJSON(queue: Dispatch.DispatchQueue = .main, dataPreprocessor: OneTwoThreeSDK.DataPreprocessor = JSONResponseSerializer.defaultDataPreprocessor, emptyResponseCodes: Swift.Set<Swift.Int> = JSONResponseSerializer.defaultEmptyResponseCodes, emptyRequestMethods: Swift.Set<OneTwoThreeSDK.HTTPMethod> = JSONResponseSerializer.defaultEmptyRequestMethods, options: Foundation.JSONSerialization.ReadingOptions = .allowFragments, completionHandler: @escaping (OneTwoThreeSDK.AFDataResponse<Any>) -> Swift.Void) -> Self
 }
-extension DownloadRequest {
+extension OneTwoThreeSDK.DownloadRequest {
   @discardableResult
   public func responseJSON(queue: Dispatch.DispatchQueue = .main, dataPreprocessor: OneTwoThreeSDK.DataPreprocessor = JSONResponseSerializer.defaultDataPreprocessor, emptyResponseCodes: Swift.Set<Swift.Int> = JSONResponseSerializer.defaultEmptyResponseCodes, emptyRequestMethods: Swift.Set<OneTwoThreeSDK.HTTPMethod> = JSONResponseSerializer.defaultEmptyRequestMethods, options: Foundation.JSONSerialization.ReadingOptions = .allowFragments, completionHandler: @escaping (OneTwoThreeSDK.AFDownloadResponse<Any>) -> Swift.Void) -> Self
 }
@@ -905,15 +904,15 @@ public struct Empty : Swift.Codable {
   public func encode(to encoder: Swift.Encoder) throws
   public init(from decoder: Swift.Decoder) throws
 }
-extension Empty : OneTwoThreeSDK.EmptyResponse {
+extension OneTwoThreeSDK.Empty : OneTwoThreeSDK.EmptyResponse {
   public static func emptyValue() -> OneTwoThreeSDK.Empty
 }
 public protocol DataDecoder {
   func decode<D>(_ type: D.Type, from data: Foundation.Data) throws -> D where D : Swift.Decodable
 }
-extension JSONDecoder : OneTwoThreeSDK.DataDecoder {
+extension Foundation.JSONDecoder : OneTwoThreeSDK.DataDecoder {
 }
-extension PropertyListDecoder : OneTwoThreeSDK.DataDecoder {
+extension Foundation.PropertyListDecoder : OneTwoThreeSDK.DataDecoder {
 }
 final public class DecodableResponseSerializer<T> : OneTwoThreeSDK.ResponseSerializer where T : Swift.Decodable {
   final public let dataPreprocessor: OneTwoThreeSDK.DataPreprocessor
@@ -925,11 +924,11 @@ final public class DecodableResponseSerializer<T> : OneTwoThreeSDK.ResponseSeria
   public typealias SerializedObject = T
   @objc deinit
 }
-extension DataRequest {
+extension OneTwoThreeSDK.DataRequest {
   @discardableResult
   public func responseDecodable<T>(of type: T.Type = T.self, queue: Dispatch.DispatchQueue = .main, dataPreprocessor: OneTwoThreeSDK.DataPreprocessor = DecodableResponseSerializer<T>.defaultDataPreprocessor, decoder: OneTwoThreeSDK.DataDecoder = JSONDecoder(), emptyResponseCodes: Swift.Set<Swift.Int> = DecodableResponseSerializer<T>.defaultEmptyResponseCodes, emptyRequestMethods: Swift.Set<OneTwoThreeSDK.HTTPMethod> = DecodableResponseSerializer<T>.defaultEmptyRequestMethods, completionHandler: @escaping (OneTwoThreeSDK.AFDataResponse<T>) -> Swift.Void) -> Self where T : Swift.Decodable
 }
-extension DownloadRequest {
+extension OneTwoThreeSDK.DownloadRequest {
   @discardableResult
   public func responseDecodable<T>(of type: T.Type = T.self, queue: Dispatch.DispatchQueue = .main, dataPreprocessor: OneTwoThreeSDK.DataPreprocessor = DecodableResponseSerializer<T>.defaultDataPreprocessor, decoder: OneTwoThreeSDK.DataDecoder = JSONDecoder(), emptyResponseCodes: Swift.Set<Swift.Int> = DecodableResponseSerializer<T>.defaultEmptyResponseCodes, emptyRequestMethods: Swift.Set<OneTwoThreeSDK.HTTPMethod> = DecodableResponseSerializer<T>.defaultEmptyRequestMethods, completionHandler: @escaping (OneTwoThreeSDK.AFDownloadResponse<T>) -> Swift.Void) -> Self where T : Swift.Decodable
 }
@@ -952,7 +951,7 @@ public struct StringStreamSerializer : OneTwoThreeSDK.DataStreamSerializer {
   public func serialize(_ data: Foundation.Data) throws -> Swift.String
   public typealias SerializedObject = Swift.String
 }
-extension DataStreamRequest {
+extension OneTwoThreeSDK.DataStreamRequest {
   @discardableResult
   final public func responseStream(on queue: Dispatch.DispatchQueue = .main, stream: @escaping OneTwoThreeSDK.DataStreamRequest.Handler<Foundation.Data, Swift.Never>) -> Self
   @discardableResult
@@ -985,7 +984,7 @@ public struct ResponseCacher {
   public let behavior: OneTwoThreeSDK.ResponseCacher.Behavior
   public init(behavior: OneTwoThreeSDK.ResponseCacher.Behavior)
 }
-extension ResponseCacher : OneTwoThreeSDK.CachedResponseHandler {
+extension OneTwoThreeSDK.ResponseCacher : OneTwoThreeSDK.CachedResponseHandler {
   public func dataTask(_ task: Foundation.URLSessionDataTask, willCacheResponse response: Foundation.CachedURLResponse, completion: @escaping (Foundation.CachedURLResponse?) -> Swift.Void)
 }
 public protocol AuthenticationCredential {
@@ -1023,7 +1022,7 @@ public class AuthenticationInterceptor<AuthenticatorType> : OneTwoThreeSDK.Reque
   public func retry(_ request: OneTwoThreeSDK.Request, for session: OneTwoThreeSDK.Session, dueTo error: Swift.Error, completion: @escaping (OneTwoThreeSDK.RetryResult) -> Swift.Void)
   @objc deinit
 }
-extension Request {
+extension OneTwoThreeSDK.Request {
   public static let didResumeNotification: Foundation.Notification.Name
   public static let didSuspendNotification: Foundation.Notification.Name
   public static let didCancelNotification: Foundation.Notification.Name
@@ -1033,7 +1032,7 @@ extension Request {
   public static let didCancelTaskNotification: Foundation.Notification.Name
   public static let didCompleteTaskNotification: Foundation.Notification.Name
 }
-extension Notification {
+extension Foundation.Notification {
   public var request: OneTwoThreeSDK.Request? {
     get
   }
@@ -1049,10 +1048,10 @@ extension Notification {
   final public func request(_ request: OneTwoThreeSDK.Request, didCompleteTask task: Foundation.URLSessionTask, with error: OneTwoThreeSDK.AFError?)
   @objc deinit
 }
-extension URLSessionConfiguration : OneTwoThreeSDK.AlamofireExtended {
+extension Foundation.URLSessionConfiguration : OneTwoThreeSDK.AlamofireExtended {
   public typealias ExtendedType = Foundation.URLSessionConfiguration
 }
-extension AlamofireExtension where ExtendedType : Foundation.URLSessionConfiguration {
+extension OneTwoThreeSDK.AlamofireExtension where ExtendedType : Foundation.URLSessionConfiguration {
   public static var `default`: Foundation.URLSessionConfiguration {
     get
   }
@@ -1107,7 +1106,7 @@ public protocol EventMonitor {
   func request(_ request: OneTwoThreeSDK.DownloadRequest, didParseResponse response: OneTwoThreeSDK.DownloadResponse<Foundation.URL?, OneTwoThreeSDK.AFError>)
   func request<Value>(_ request: OneTwoThreeSDK.DownloadRequest, didParseResponse response: OneTwoThreeSDK.DownloadResponse<Value, OneTwoThreeSDK.AFError>)
 }
-extension EventMonitor {
+extension OneTwoThreeSDK.EventMonitor {
   public var queue: Dispatch.DispatchQueue {
     get
   }
@@ -1288,7 +1287,7 @@ open class ClosureEventMonitor : OneTwoThreeSDK.EventMonitor {
   open func request(_ request: OneTwoThreeSDK.DownloadRequest, didParseResponse response: OneTwoThreeSDK.DownloadResponse<Foundation.URL?, OneTwoThreeSDK.AFError>)
   @objc deinit
 }
-extension URLRequest {
+extension Foundation.URLRequest {
   public var method: OneTwoThreeSDK.HTTPMethod? {
     get
     set
@@ -1315,12 +1314,12 @@ public protocol RequestRetrier {
 }
 public protocol RequestInterceptor : OneTwoThreeSDK.RequestAdapter, OneTwoThreeSDK.RequestRetrier {
 }
-extension RequestInterceptor {
+extension OneTwoThreeSDK.RequestInterceptor {
   public func adapt(_ urlRequest: Foundation.URLRequest, for session: OneTwoThreeSDK.Session, completion: @escaping (Swift.Result<Foundation.URLRequest, Swift.Error>) -> Swift.Void)
   public func retry(_ request: OneTwoThreeSDK.Request, for session: OneTwoThreeSDK.Session, dueTo error: Swift.Error, completion: @escaping (OneTwoThreeSDK.RetryResult) -> Swift.Void)
 }
-public typealias AdaptHandler = (Foundation.URLRequest, OneTwoThreeSDK.Session, @escaping (Swift.Result<Foundation.URLRequest, Swift.Error>) -> Swift.Void) -> Swift.Void
-public typealias RetryHandler = (OneTwoThreeSDK.Request, OneTwoThreeSDK.Session, Swift.Error, @escaping (OneTwoThreeSDK.RetryResult) -> Swift.Void) -> Swift.Void
+public typealias AdaptHandler = (Foundation.URLRequest, OneTwoThreeSDK.Session, _ completion: @escaping (Swift.Result<Foundation.URLRequest, Swift.Error>) -> Swift.Void) -> Swift.Void
+public typealias RetryHandler = (OneTwoThreeSDK.Request, OneTwoThreeSDK.Session, Swift.Error, _ completion: @escaping (OneTwoThreeSDK.RetryResult) -> Swift.Void) -> Swift.Void
 open class Adapter : OneTwoThreeSDK.RequestInterceptor {
   public init(_ adaptHandler: @escaping OneTwoThreeSDK.AdaptHandler)
   open func adapt(_ urlRequest: Foundation.URLRequest, for session: OneTwoThreeSDK.Session, completion: @escaping (Swift.Result<Foundation.URLRequest, Swift.Error>) -> Swift.Void)
@@ -1361,19 +1360,19 @@ public struct HTTPHeaders {
     get
   }
 }
-extension HTTPHeaders : Swift.ExpressibleByDictionaryLiteral {
+extension OneTwoThreeSDK.HTTPHeaders : Swift.ExpressibleByDictionaryLiteral {
   public init(dictionaryLiteral elements: (Swift.String, Swift.String)...)
   public typealias Key = Swift.String
   public typealias Value = Swift.String
 }
-extension HTTPHeaders : Swift.ExpressibleByArrayLiteral {
+extension OneTwoThreeSDK.HTTPHeaders : Swift.ExpressibleByArrayLiteral {
   public init(arrayLiteral elements: OneTwoThreeSDK.HTTPHeader...)
   public typealias ArrayLiteralElement = OneTwoThreeSDK.HTTPHeader
 }
-extension HTTPHeaders : Swift.Sequence {
+extension OneTwoThreeSDK.HTTPHeaders : Swift.Sequence {
   public func makeIterator() -> Swift.IndexingIterator<[OneTwoThreeSDK.HTTPHeader]>
 }
-extension HTTPHeaders : Swift.Collection {
+extension OneTwoThreeSDK.HTTPHeaders : Swift.Collection {
   public var startIndex: Swift.Int {
     get
   }
@@ -1390,7 +1389,7 @@ extension HTTPHeaders : Swift.Collection {
   public typealias Iterator = Swift.IndexingIterator<[OneTwoThreeSDK.HTTPHeader]>
   public typealias SubSequence = Swift.Slice<OneTwoThreeSDK.HTTPHeaders>
 }
-extension HTTPHeaders : Swift.CustomStringConvertible {
+extension OneTwoThreeSDK.HTTPHeaders : Swift.CustomStringConvertible {
   public var description: Swift.String {
     get
   }
@@ -1405,12 +1404,12 @@ public struct HTTPHeader : Swift.Hashable {
     get
   }
 }
-extension HTTPHeader : Swift.CustomStringConvertible {
+extension OneTwoThreeSDK.HTTPHeader : Swift.CustomStringConvertible {
   public var description: Swift.String {
     get
   }
 }
-extension HTTPHeader {
+extension OneTwoThreeSDK.HTTPHeader {
   public static func accept(_ value: Swift.String) -> OneTwoThreeSDK.HTTPHeader
   public static func acceptCharset(_ value: Swift.String) -> OneTwoThreeSDK.HTTPHeader
   public static func acceptLanguage(_ value: Swift.String) -> OneTwoThreeSDK.HTTPHeader
@@ -1422,26 +1421,26 @@ extension HTTPHeader {
   public static func contentType(_ value: Swift.String) -> OneTwoThreeSDK.HTTPHeader
   public static func userAgent(_ value: Swift.String) -> OneTwoThreeSDK.HTTPHeader
 }
-extension HTTPHeaders {
+extension OneTwoThreeSDK.HTTPHeaders {
   public static let `default`: OneTwoThreeSDK.HTTPHeaders
 }
-extension HTTPHeader {
+extension OneTwoThreeSDK.HTTPHeader {
   public static let defaultAcceptEncoding: OneTwoThreeSDK.HTTPHeader
   public static let defaultAcceptLanguage: OneTwoThreeSDK.HTTPHeader
   public static let defaultUserAgent: OneTwoThreeSDK.HTTPHeader
 }
-extension URLRequest {
+extension Foundation.URLRequest {
   public var headers: OneTwoThreeSDK.HTTPHeaders {
     get
     set
   }
 }
-extension HTTPURLResponse {
+extension Foundation.HTTPURLResponse {
   public var headers: OneTwoThreeSDK.HTTPHeaders {
     get
   }
 }
-extension URLSessionConfiguration {
+extension Foundation.URLSessionConfiguration {
   public var headers: OneTwoThreeSDK.HTTPHeaders {
     get
     set
@@ -1574,21 +1573,21 @@ extension URLSessionConfiguration {
   public func onURLSessionTaskCreation(on queue: Dispatch.DispatchQueue = .main, perform handler: @escaping (Foundation.URLSessionTask) -> Swift.Void) -> Self
   @objc deinit
 }
-extension Request : Swift.Equatable {
+extension OneTwoThreeSDK.Request : Swift.Equatable {
   public static func == (lhs: OneTwoThreeSDK.Request, rhs: OneTwoThreeSDK.Request) -> Swift.Bool
 }
-extension Request : Swift.Hashable {
+extension OneTwoThreeSDK.Request : Swift.Hashable {
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
 }
-extension Request : Swift.CustomStringConvertible {
+extension OneTwoThreeSDK.Request : Swift.CustomStringConvertible {
   public var description: Swift.String {
     get
   }
 }
-extension Request {
+extension OneTwoThreeSDK.Request {
   public func cURLDescription() -> Swift.String
 }
 public protocol RequestDelegate : AnyObject {
@@ -1634,7 +1633,7 @@ public protocol RequestDelegate : AnyObject {
   final public func asInputStream(bufferSize: Swift.Int = 1024) -> Foundation.InputStream?
   @objc deinit
 }
-extension DataStreamRequest.Stream {
+extension OneTwoThreeSDK.DataStreamRequest.Stream {
   public var result: Swift.Result<Success, Failure>? {
     get
   }
@@ -1658,7 +1657,7 @@ extension DataStreamRequest.Stream {
     public typealias Element = OneTwoThreeSDK.DownloadRequest.Options
     public typealias RawValue = Swift.Int
   }
-  public typealias Destination = (Foundation.URL, Foundation.HTTPURLResponse) -> (destinationURL: Foundation.URL, options: OneTwoThreeSDK.DownloadRequest.Options)
+  public typealias Destination = (_ temporaryURL: Foundation.URL, _ response: Foundation.HTTPURLResponse) -> (destinationURL: Foundation.URL, options: OneTwoThreeSDK.DownloadRequest.Options)
   public class func suggestedDownloadDestination(for directory: Foundation.FileManager.SearchPathDirectory = .documentDirectory, in domain: Foundation.FileManager.SearchPathDomainMask = .userDomainMask, options: OneTwoThreeSDK.DownloadRequest.Options = []) -> OneTwoThreeSDK.DownloadRequest.Destination
   public enum Downloadable {
     case request(OneTwoThreeSDK.URLRequestConvertible)
@@ -1677,7 +1676,7 @@ extension DataStreamRequest.Stream {
   @discardableResult
   public func cancel(producingResumeData shouldProduceResumeData: Swift.Bool) -> Self
   @discardableResult
-  public func cancel(byProducingResumeData completionHandler: @escaping (Foundation.Data?) -> Swift.Void) -> Self
+  public func cancel(byProducingResumeData completionHandler: @escaping (_ data: Foundation.Data?) -> Swift.Void) -> Self
   @discardableResult
   public func validate(_ validation: @escaping OneTwoThreeSDK.DownloadRequest.Validation) -> Self
   @objc deinit
@@ -1697,7 +1696,7 @@ extension DataStreamRequest.Stream {
 public protocol UploadableConvertible {
   func createUploadable() throws -> OneTwoThreeSDK.UploadRequest.Uploadable
 }
-extension UploadRequest.Uploadable : OneTwoThreeSDK.UploadableConvertible {
+extension OneTwoThreeSDK.UploadRequest.Uploadable : OneTwoThreeSDK.UploadableConvertible {
   public func createUploadable() throws -> OneTwoThreeSDK.UploadRequest.Uploadable
 }
 public protocol UploadConvertible : OneTwoThreeSDK.URLRequestConvertible, OneTwoThreeSDK.UploadableConvertible {
@@ -1805,10 +1804,10 @@ public struct JSONEncoding : OneTwoThreeSDK.ParameterEncoding {
   public func encode(_ urlRequest: OneTwoThreeSDK.URLRequestConvertible, with parameters: OneTwoThreeSDK.Parameters?) throws -> Foundation.URLRequest
   public func encode(_ urlRequest: OneTwoThreeSDK.URLRequestConvertible, withJSONObject jsonObject: Any? = nil) throws -> Foundation.URLRequest
 }
-extension Request {
+extension OneTwoThreeSDK.Request {
   public typealias ValidationResult = Swift.Result<Swift.Void, Swift.Error>
 }
-extension DataRequest {
+extension OneTwoThreeSDK.DataRequest {
   public typealias Validation = (Foundation.URLRequest?, Foundation.HTTPURLResponse, Foundation.Data?) -> OneTwoThreeSDK.DataRequest.ValidationResult
   @discardableResult
   public func validate<S>(statusCode acceptableStatusCodes: S) -> Self where S : Swift.Sequence, S.Element == Swift.Int
@@ -1817,8 +1816,8 @@ extension DataRequest {
   @discardableResult
   public func validate() -> Self
 }
-extension DataStreamRequest {
-  public typealias Validation = (Foundation.URLRequest?, Foundation.HTTPURLResponse) -> OneTwoThreeSDK.DataStreamRequest.ValidationResult
+extension OneTwoThreeSDK.DataStreamRequest {
+  public typealias Validation = (_ request: Foundation.URLRequest?, _ response: Foundation.HTTPURLResponse) -> OneTwoThreeSDK.DataStreamRequest.ValidationResult
   @discardableResult
   final public func validate<S>(statusCode acceptableStatusCodes: S) -> Self where S : Swift.Sequence, S.Element == Swift.Int
   @discardableResult
@@ -1826,8 +1825,8 @@ extension DataStreamRequest {
   @discardableResult
   final public func validate() -> Self
 }
-extension DownloadRequest {
-  public typealias Validation = (Foundation.URLRequest?, Foundation.HTTPURLResponse, Foundation.URL?) -> OneTwoThreeSDK.DownloadRequest.ValidationResult
+extension OneTwoThreeSDK.DownloadRequest {
+  public typealias Validation = (_ request: Foundation.URLRequest?, _ response: Foundation.HTTPURLResponse, _ fileURL: Foundation.URL?) -> OneTwoThreeSDK.DownloadRequest.ValidationResult
   @discardableResult
   public func validate<S>(statusCode acceptableStatusCodes: S) -> Self where S : Swift.Sequence, S.Element == Swift.Int
   @discardableResult
@@ -1899,13 +1898,13 @@ final public class DisabledTrustEvaluator : OneTwoThreeSDK.ServerTrustEvaluating
   final public func evaluate(_ trust: Security.SecTrust, forHost host: Swift.String) throws
   @objc deinit
 }
-extension Array where Element == OneTwoThreeSDK.ServerTrustEvaluating {
+extension Swift.Array where Element == OneTwoThreeSDK.ServerTrustEvaluating {
   public func evaluate(_ trust: Security.SecTrust, forHost host: Swift.String) throws
 }
-extension Bundle : OneTwoThreeSDK.AlamofireExtended {
+extension Foundation.Bundle : OneTwoThreeSDK.AlamofireExtended {
   public typealias ExtendedType = Foundation.Bundle
 }
-extension AlamofireExtension where ExtendedType : Foundation.Bundle {
+extension OneTwoThreeSDK.AlamofireExtension where ExtendedType : Foundation.Bundle {
   public var certificates: [Security.SecCertificate] {
     get
   }
@@ -1914,17 +1913,17 @@ extension AlamofireExtension where ExtendedType : Foundation.Bundle {
   }
   public func paths(forResourcesOfTypes types: [Swift.String]) -> [Swift.String]
 }
-extension SecTrust : OneTwoThreeSDK.AlamofireExtended {
+extension Security.SecTrust : OneTwoThreeSDK.AlamofireExtended {
   public typealias ExtendedType = Security.SecTrust
 }
-extension AlamofireExtension where ExtendedType == Security.SecTrust {
+extension OneTwoThreeSDK.AlamofireExtension where ExtendedType == Security.SecTrust {
   @available(iOS 12, macOS 10.14, tvOS 12, watchOS 5, *)
   public func evaluate(afterApplying policy: Security.SecPolicy) throws
   @available(iOS, introduced: 10, deprecated: 12, renamed: "evaluate(afterApplying:)")
   @available(macOS, introduced: 10.12, deprecated: 10.14, renamed: "evaluate(afterApplying:)")
   @available(tvOS, introduced: 10, deprecated: 12, renamed: "evaluate(afterApplying:)")
   @available(watchOS, introduced: 3, deprecated: 5, renamed: "evaluate(afterApplying:)")
-  public func validate(policy: Security.SecPolicy, errorProducer: (Darwin.OSStatus, Security.SecTrustResultType) -> Swift.Error) throws
+  public func validate(policy: Security.SecPolicy, errorProducer: (_ status: Darwin.OSStatus, _ result: Security.SecTrustResultType) -> Swift.Error) throws
   public func apply(policy: Security.SecPolicy) throws -> Security.SecTrust
   @available(iOS 12, macOS 10.14, tvOS 12, watchOS 5, *)
   public func evaluate() throws
@@ -1932,7 +1931,7 @@ extension AlamofireExtension where ExtendedType == Security.SecTrust {
   @available(macOS, introduced: 10.12, deprecated: 10.14, renamed: "evaluate()")
   @available(tvOS, introduced: 10, deprecated: 12, renamed: "evaluate()")
   @available(watchOS, introduced: 3, deprecated: 5, renamed: "evaluate()")
-  public func validate(errorProducer: (Darwin.OSStatus, Security.SecTrustResultType) -> Swift.Error) throws
+  public func validate(errorProducer: (_ status: Darwin.OSStatus, _ result: Security.SecTrustResultType) -> Swift.Error) throws
   public func setAnchorCertificates(_ certificates: [Security.SecCertificate]) throws
   public var publicKeys: [Security.SecKey] {
     get
@@ -1946,18 +1945,18 @@ extension AlamofireExtension where ExtendedType == Security.SecTrust {
   public func performDefaultValidation(forHost host: Swift.String) throws
   public func performValidation(forHost host: Swift.String) throws
 }
-extension SecPolicy : OneTwoThreeSDK.AlamofireExtended {
+extension Security.SecPolicy : OneTwoThreeSDK.AlamofireExtended {
   public typealias ExtendedType = Security.SecPolicy
 }
-extension AlamofireExtension where ExtendedType == Security.SecPolicy {
+extension OneTwoThreeSDK.AlamofireExtension where ExtendedType == Security.SecPolicy {
   public static let `default`: Security.SecPolicy
   public static func hostname(_ hostname: Swift.String) -> Security.SecPolicy
   public static func revocation(options: OneTwoThreeSDK.RevocationTrustEvaluator.Options) throws -> Security.SecPolicy
 }
-extension Array : OneTwoThreeSDK.AlamofireExtended {
+extension Swift.Array : OneTwoThreeSDK.AlamofireExtended {
   public typealias ExtendedType = Swift.Array<Element>
 }
-extension AlamofireExtension where ExtendedType == [Security.SecCertificate] {
+extension OneTwoThreeSDK.AlamofireExtension where ExtendedType == [Security.SecCertificate] {
   public var data: [Foundation.Data] {
     get
   }
@@ -1965,26 +1964,26 @@ extension AlamofireExtension where ExtendedType == [Security.SecCertificate] {
     get
   }
 }
-extension SecCertificate : OneTwoThreeSDK.AlamofireExtended {
+extension Security.SecCertificate : OneTwoThreeSDK.AlamofireExtended {
   public typealias ExtendedType = Security.SecCertificate
 }
-extension AlamofireExtension where ExtendedType == Security.SecCertificate {
+extension OneTwoThreeSDK.AlamofireExtension where ExtendedType == Security.SecCertificate {
   public var publicKey: Security.SecKey? {
     get
   }
 }
-extension Int32 : OneTwoThreeSDK.AlamofireExtended {
+extension Swift.Int32 : OneTwoThreeSDK.AlamofireExtended {
   public typealias ExtendedType = Swift.Int32
 }
-extension AlamofireExtension where ExtendedType == Darwin.OSStatus {
+extension OneTwoThreeSDK.AlamofireExtension where ExtendedType == Darwin.OSStatus {
   public var isSuccess: Swift.Bool {
     get
   }
 }
-extension SecTrustResultType : OneTwoThreeSDK.AlamofireExtended {
+extension Security.SecTrustResultType : OneTwoThreeSDK.AlamofireExtended {
   public typealias ExtendedType = Security.SecTrustResultType
 }
-extension AlamofireExtension where ExtendedType == Security.SecTrustResultType {
+extension OneTwoThreeSDK.AlamofireExtension where ExtendedType == Security.SecTrustResultType {
   public var isSuccess: Swift.Bool {
     get
   }

@@ -4,25 +4,13 @@
 <dict>
 	<key>files</key>
 	<dict>
-		<key>Frameworks/OpenSSL.framework/Info.plist</key>
-		<data>
-		sH+CIXLXxlPveTPfviyjr2RhSo4=
-		</data>
-		<key>Frameworks/OpenSSL.framework/OpenSSL</key>
-		<data>
-		z+KkZ9NPjvQwH3F2KyCKPPVWdto=
-		</data>
-		<key>Frameworks/OpenSSL.framework/_CodeSignature/CodeResources</key>
-		<data>
-		cLOfz3myrSwY6QW/3OnQdA2jhmQ=
-		</data>
 		<key>Headers/NSData+Base64.h</key>
 		<data>
 		CxJrNPvzLMqAnaAYeLyeoSe1MIE=
 		</data>
 		<key>Headers/OneTwoThreeSDK-Swift.h</key>
 		<data>
-		mS7OiNeferKwz2dJ7MA4OVdHeaA=
+		MmFecxq8OwsD/W9UxTo3DsV2VCI=
 		</data>
 		<key>Headers/OneTwoThreeSDK.h</key>
 		<data>
@@ -34,55 +22,31 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		Rr0oL4ptJzmt4dyoWgTtJrflQ7Y=
+		INFyh2LN6FdxpVIZijGjzCQFKp4=
 		</data>
 		<key>Modules/OneTwoThreeSDK.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		LvPcsrsjT8RQ30ilVcgvPEysWBU=
+		ukTm/pBRm1Z1RKUBWbrX3/j4y08=
 		</data>
 		<key>Modules/OneTwoThreeSDK.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		eUz1Td3/VCURjJhEWRAOLIdCarY=
+		oMTUwbbxJEJAd016bgQ6+ZZtdSI=
 		</data>
 		<key>Modules/OneTwoThreeSDK.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		jdNl/2JWTEq42V4uFcyyapZRCnM=
-		</data>
-		<key>Modules/OneTwoThreeSDK.swiftmodule/arm64.swiftdoc</key>
-		<data>
-		LvPcsrsjT8RQ30ilVcgvPEysWBU=
-		</data>
-		<key>Modules/OneTwoThreeSDK.swiftmodule/arm64.swiftinterface</key>
-		<data>
-		eUz1Td3/VCURjJhEWRAOLIdCarY=
-		</data>
-		<key>Modules/OneTwoThreeSDK.swiftmodule/arm64.swiftmodule</key>
-		<data>
-		jdNl/2JWTEq42V4uFcyyapZRCnM=
+		utdCZm7fnvI/vLf5CMUXgitb3jo=
 		</data>
 		<key>Modules/OneTwoThreeSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		xXPNAjtv9CqekDl6rysy2kFzqBE=
+		I6iFfWUIi0STkXCwWzznvE6qz+U=
 		</data>
 		<key>Modules/OneTwoThreeSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		j1IFqEJr4a9r3iioJ68su3lmumg=
+		ghrx1MWUxUMGdEV/6IwBiGI+Qs0=
 		</data>
 		<key>Modules/OneTwoThreeSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		4vODxZo2SKyfRsMdXtgOekb5PzA=
-		</data>
-		<key>Modules/OneTwoThreeSDK.swiftmodule/x86_64.swiftdoc</key>
-		<data>
-		xXPNAjtv9CqekDl6rysy2kFzqBE=
-		</data>
-		<key>Modules/OneTwoThreeSDK.swiftmodule/x86_64.swiftinterface</key>
-		<data>
-		j1IFqEJr4a9r3iioJ68su3lmumg=
-		</data>
-		<key>Modules/OneTwoThreeSDK.swiftmodule/x86_64.swiftmodule</key>
-		<data>
-		4vODxZo2SKyfRsMdXtgOekb5PzA=
+		NKazX9ofkBKNLXg7LZ111t3SG3k=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -91,27 +55,6 @@
 	</dict>
 	<key>files2</key>
 	<dict>
-		<key>Frameworks/OpenSSL.framework/Info.plist</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			dO1q+GLkqY59q6QW0hrfKxxuzmRRNIveW3dcaR8R78M=
-			</data>
-		</dict>
-		<key>Frameworks/OpenSSL.framework/OpenSSL</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			v/pkFzxHB8m+fc22BQ5HztUGgSFX0qiKCcCdVhslp3U=
-			</data>
-		</dict>
-		<key>Frameworks/OpenSSL.framework/_CodeSignature/CodeResources</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			WImrEtO2t5qDvZU+4yfe5PSD+Tcq2naCC8BDWssRX/k=
-			</data>
-		</dict>
 		<key>Headers/NSData+Base64.h</key>
 		<dict>
 			<key>hash2</key>
@@ -123,7 +66,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			HdTTW0347TyhuocZtVqqud7HADVWSveJl9AdY15jtVQ=
+			m1UEUVL4FS8463ranMAKwQGKTIGoshXnTJT28UEDnd8=
 			</data>
 		</dict>
 		<key>Headers/OneTwoThreeSDK.h</key>
@@ -144,84 +87,42 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			ArZw+/XWoQ1P2kid6hZ2wDcTFsSMXX/mbvUoFeyl4G4=
+			InJuXQNlw4/A2QyJnUx/SaPSQJapNdqW6/gjwSLiLE8=
 			</data>
 		</dict>
 		<key>Modules/OneTwoThreeSDK.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Jaq3pzmcFphPzMpXmDnlNJ6UQcabokaWqUrGDS4ENuo=
+			ECYEtCJbQHfXTNdx7iT4Mp+6NLjCFrGk9yO7aF2riiM=
 			</data>
 		</dict>
 		<key>Modules/OneTwoThreeSDK.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			1zhzzTO2RroiqDllIWfmgRjJGRBTYWqPccLqhJ21cQY=
-			</data>
-		</dict>
-		<key>Modules/OneTwoThreeSDK.swiftmodule/arm64.swiftdoc</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			ArZw+/XWoQ1P2kid6hZ2wDcTFsSMXX/mbvUoFeyl4G4=
-			</data>
-		</dict>
-		<key>Modules/OneTwoThreeSDK.swiftmodule/arm64.swiftinterface</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			Jaq3pzmcFphPzMpXmDnlNJ6UQcabokaWqUrGDS4ENuo=
-			</data>
-		</dict>
-		<key>Modules/OneTwoThreeSDK.swiftmodule/arm64.swiftmodule</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			1zhzzTO2RroiqDllIWfmgRjJGRBTYWqPccLqhJ21cQY=
+			Q0FMtRBnZwMS2N7Wqgb9BnsvaWNed0iunMeVb1yf87E=
 			</data>
 		</dict>
 		<key>Modules/OneTwoThreeSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			582QHDyBs3OuQCzaY11umVcK+/BhwjuQTwbkUrjohMQ=
+			0fEuIOuDT83+nQYMlsI34ONMrQxjDuGNi5JM5Ug2Blg=
 			</data>
 		</dict>
 		<key>Modules/OneTwoThreeSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			ozc9Ev0yDpOIObqvDiBiVU9gRvTGVZlTmEtwrhaiy4E=
+			70F+GSpGYJ6XENSQYngFC0LhJlB7XuGa1PT/KHMPIy4=
 			</data>
 		</dict>
 		<key>Modules/OneTwoThreeSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			upVRyE30AxNhYrBxTk7Ey6Z2R6RXWV4RuNPiosBGo4A=
-			</data>
-		</dict>
-		<key>Modules/OneTwoThreeSDK.swiftmodule/x86_64.swiftdoc</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			582QHDyBs3OuQCzaY11umVcK+/BhwjuQTwbkUrjohMQ=
-			</data>
-		</dict>
-		<key>Modules/OneTwoThreeSDK.swiftmodule/x86_64.swiftinterface</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			ozc9Ev0yDpOIObqvDiBiVU9gRvTGVZlTmEtwrhaiy4E=
-			</data>
-		</dict>
-		<key>Modules/OneTwoThreeSDK.swiftmodule/x86_64.swiftmodule</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			upVRyE30AxNhYrBxTk7Ey6Z2R6RXWV4RuNPiosBGo4A=
+			9fljgBsOhnDS/z67bxFW8QXsQqtx74PNnGFWzEqwSY0=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

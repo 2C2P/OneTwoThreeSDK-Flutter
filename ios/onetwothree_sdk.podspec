@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'onetwothree_sdk'
-  s.version          = '0.0.1'
+  s.version          = '0.0.3'
   s.summary          = 'A OneTwoThreeSDK Flutter plugin.'
   s.description      = <<-DESC
 A OneTwoThreeSDK Flutter plugin.
@@ -23,6 +23,6 @@ A OneTwoThreeSDK Flutter plugin.
   
   # OneTwoThreeSDK framework
   s.preserve_paths = 'Frameworks/*.xcframework'
-  s.xcconfig = { 'OTHER_LDFLAGS' => '-framework OneTwoThreeSDK -ObjC -lstdc++ -lpthread -lresolv' }
-  s.vendored_frameworks = 'Frameworks/OneTwoThreeSDK.xcframework'
+  s.xcconfig = { 'OTHER_LDFLAGS' => '-framework OneTwoThreeSDK -framework OpenSSL' }
+  s.vendored_frameworks = 'Frameworks/OneTwoThreeSDK.xcframework', 'Frameworks/OpenSSL.xcframework'
 end

@@ -4,25 +4,13 @@
 <dict>
 	<key>files</key>
 	<dict>
-		<key>Frameworks/OpenSSL.framework/Info.plist</key>
-		<data>
-		sIZLOdoESKi2pX4fnZw1OHHktZE=
-		</data>
-		<key>Frameworks/OpenSSL.framework/OpenSSL</key>
-		<data>
-		87SDzHj6ePBlLeDXEkXY6PzT4AM=
-		</data>
-		<key>Frameworks/OpenSSL.framework/_CodeSignature/CodeResources</key>
-		<data>
-		eoeCqykCR0QpYIeUpjnvA5AiGPI=
-		</data>
 		<key>Headers/NSData+Base64.h</key>
 		<data>
 		CxJrNPvzLMqAnaAYeLyeoSe1MIE=
 		</data>
 		<key>Headers/OneTwoThreeSDK-Swift.h</key>
 		<data>
-		EGqWlDSFqOfhvt6OiMaaE3KpOcM=
+		/TUzeejN9l2QY+ORSsXZHmNN9pY=
 		</data>
 		<key>Headers/OneTwoThreeSDK.h</key>
 		<data>
@@ -34,31 +22,19 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		jUGF/oZtHmawPwJnf5WrK/5mw9c=
+		wZ7T9nT5YodzJeiE2HB+ymO89T0=
 		</data>
 		<key>Modules/OneTwoThreeSDK.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
-		wrDCcPZfpb/1P1203UZdbIlJCuQ=
+		+fd8uONS47P/Oow8KhoXy26Jdfs=
 		</data>
 		<key>Modules/OneTwoThreeSDK.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<data>
-		7Tt19v5JaYwZTIvNC3ex8z9fSnQ=
+		EuPJ6P8Ys96pCDm9dCi/nT5vayE=
 		</data>
 		<key>Modules/OneTwoThreeSDK.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		J3bpEy12Gvh5Nkr3nyb7AtiCCVg=
-		</data>
-		<key>Modules/OneTwoThreeSDK.swiftmodule/arm64.swiftdoc</key>
-		<data>
-		wrDCcPZfpb/1P1203UZdbIlJCuQ=
-		</data>
-		<key>Modules/OneTwoThreeSDK.swiftmodule/arm64.swiftinterface</key>
-		<data>
-		7Tt19v5JaYwZTIvNC3ex8z9fSnQ=
-		</data>
-		<key>Modules/OneTwoThreeSDK.swiftmodule/arm64.swiftmodule</key>
-		<data>
-		J3bpEy12Gvh5Nkr3nyb7AtiCCVg=
+		5iN8qxq0nUVlksU2OdVFPAx/iTg=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -67,27 +43,6 @@
 	</dict>
 	<key>files2</key>
 	<dict>
-		<key>Frameworks/OpenSSL.framework/Info.plist</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			r8ndVcr6p22VR1pkoXIhpIFVQrI2Jr1Hpat2D560zWU=
-			</data>
-		</dict>
-		<key>Frameworks/OpenSSL.framework/OpenSSL</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			59FVjRvzkD4Kd0i2Ie+sPM+j8udwKIc/XDHJxB1tvY8=
-			</data>
-		</dict>
-		<key>Frameworks/OpenSSL.framework/_CodeSignature/CodeResources</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			HBjODBNsI87g4kZAsPZ+ShPdk+po5SpYPVIFjUecqbs=
-			</data>
-		</dict>
 		<key>Headers/NSData+Base64.h</key>
 		<dict>
 			<key>hash2</key>
@@ -99,7 +54,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			rVHAEEKHtnn+2dXPMMFoH6JM3MoL/uAmzUAa39WBKBc=
+			/P2PjVQxuc/q+W1LKuQFrdgGCC0G/W9miQGTBfHSXOM=
 			</data>
 		</dict>
 		<key>Headers/OneTwoThreeSDK.h</key>
@@ -120,42 +75,21 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			bhEdo5YCnX+RLu90mmYrQMCZVyUSIGvem8SxkAYxNC8=
+			UBLFcEBrgEwobjOMoMwZVfNcus/k/N5cbss8kC2zxbU=
 			</data>
 		</dict>
 		<key>Modules/OneTwoThreeSDK.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			p1gn53YL+nsUlhnTgFvEnA/CKmjpjzUqJ1flDhFNUDs=
+			plEEFqqTAspgY0cExAP6O4VH1frGM8jv/ct4mLlQqOw=
 			</data>
 		</dict>
 		<key>Modules/OneTwoThreeSDK.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			KVgA1i9lDzYyCZqrfaArZAq3j+B3k7jyTY2swLtOxB4=
-			</data>
-		</dict>
-		<key>Modules/OneTwoThreeSDK.swiftmodule/arm64.swiftdoc</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			bhEdo5YCnX+RLu90mmYrQMCZVyUSIGvem8SxkAYxNC8=
-			</data>
-		</dict>
-		<key>Modules/OneTwoThreeSDK.swiftmodule/arm64.swiftinterface</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			p1gn53YL+nsUlhnTgFvEnA/CKmjpjzUqJ1flDhFNUDs=
-			</data>
-		</dict>
-		<key>Modules/OneTwoThreeSDK.swiftmodule/arm64.swiftmodule</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			KVgA1i9lDzYyCZqrfaArZAq3j+B3k7jyTY2swLtOxB4=
+			Tr/nUc3O68qbNWQn35HGPRNK+6J2C1C8T2PnG8F0mlA=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
