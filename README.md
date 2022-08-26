@@ -11,7 +11,7 @@ Add this to your package's pubspec.yaml file:
 
 ```yaml
 dependencies:
-  onetwothree_sdk: ^0.0.2
+  onetwothree_sdk: ^0.0.3
 ```
 
 ## System Requirements
