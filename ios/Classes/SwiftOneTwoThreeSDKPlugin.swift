@@ -45,10 +45,13 @@ public class SwiftOneTwoThreeSDKPlugin: NSObject, FlutterPlugin {
         
         SDKConstants.isProduction = isProd
         SDKConstants.checkSumKey = checkSumKey
-        
+        SDKConstants.publicKey = publicKey
+        SDKConstants.privateKey = privateKey
+
+        // Replacing function is bug from some project. !!!!
         /// Replace whitespace in front of multiline key.
-        SDKConstants.publicKey = publicKey.replacingOccurrences(of: "(^\\s+)|(\n\\s+)", with: "\n", options: .regularExpression).trimmingCharacters(in: .whitespacesAndNewlines)
-        SDKConstants.privateKey = privateKey.replacingOccurrences(of: "(^\\s+)|(\n\\s+)", with: "\n", options: .regularExpression).trimmingCharacters(in: .whitespacesAndNewlines)
+//        SDKConstants.publicKey = publicKey.replacingOccurrences(of: "(^\\s+)|(\n\\s+)", with: "\n", options: .regularExpression).trimmingCharacters(in: .whitespacesAndNewlines)
+//        SDKConstants.privateKey = privateKey.replacingOccurrences(of: "(^\\s+)|(\n\\s+)", with: "\n", options: .regularExpression).trimmingCharacters(in: .whitespacesAndNewlines)
         SDKConstants.passphrase = passphrase
         
         // Return result to flutter
